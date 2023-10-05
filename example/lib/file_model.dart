@@ -2,17 +2,15 @@ class FileModel {
   List<String> files;
   String folder;
 
-  FileModel({this.files, this.folder});
+  FileModel({required this.files, required this.folder});
 
-  FileModel.fromJson(Map<String, dynamic> json) {
-    files = json['files'].cast<String>();
-    folder = json['folderName'];
-  }
+  factory FileModel.fromJson(Map<String, dynamic> json) =>
+      FileModel(files: json['files'].cast<String>(), folder: json['folderName']);
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['files'] = this.files;
-    data['folderName'] = this.folder;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['files'] = files;
+    data['folderName'] = folder;
     return data;
   }
 }

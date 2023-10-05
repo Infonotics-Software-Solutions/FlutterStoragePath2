@@ -80,53 +80,13 @@ public class StoragePathPlugin implements MethodCallHandler, FlutterPlugin, Acti
     @Override
     public void onMethodCall(MethodCall call, final Result result) {
         if (call.method.equals("getImagesPath")) {
-            Permissions.check(activity, Manifest.permission.READ_EXTERNAL_STORAGE, null, new PermissionHandler() {
-                @Override
-                public void onGranted() {
-                    getImagePaths(result);
-                }
-
-                @Override
-                public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                    result.error("1", "Permission denied", null);
-                }
-            });
+            getImagePaths(result);
         } else if (call.method.equals("getVideosPath")) {
-            Permissions.check(activity, Manifest.permission.READ_EXTERNAL_STORAGE, null, new PermissionHandler() {
-                @Override
-                public void onGranted() {
-                    getVideoPath(result);
-                }
-
-                @Override
-                public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                    result.error("1", "Permission denied", null);
-                }
-            });
+            getVideoPath(result);
         } else if (call.method.equals("getFilesPath")) {
-            Permissions.check(activity, Manifest.permission.READ_EXTERNAL_STORAGE, null, new PermissionHandler() {
-                @Override
-                public void onGranted() {
-                    getFilesPath(result);
-                }
-
-                @Override
-                public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                    result.error("1", "Permission denied", null);
-                }
-            });
+            getFilesPath(result);
         } else if (call.method.equals("getAudioPath")) {
-            Permissions.check(activity, Manifest.permission.READ_EXTERNAL_STORAGE, null, new PermissionHandler() {
-                @Override
-                public void onGranted() {
-                    getAudioPath(result);
-                }
-
-                @Override
-                public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                    result.error("1", "Permission denied", null);
-                }
-            });
+            getAudioPath(result);
         } else {
             result.notImplemented();
         }

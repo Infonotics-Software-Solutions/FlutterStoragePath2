@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_storage_path/flutter_storage_path.dart';
+import 'package:storage_path_example/utility.dart';
 
 import 'file_model.dart';
 
@@ -26,13 +27,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   getImagesPath() async {
-    var imagePath = await StoragePath.imagesPath;
-    var images = jsonDecode(imagePath!) as List;
-    _files = images.map<FileModel>((e) => FileModel.fromJson(e)).toList();
-    if (_files.length > 0)
-      setState(() {
-        _selectedModel = _files[0];
-      });
+     if(await Utils().requestStoragePermission()){
+       var imagePath = await StoragePath.imagesPath;
+       debugPrint("imagePath $imagePath");
+       var images = jsonDecode(imagePath!) as List;
+       _files = images.map<FileModel>((e) => FileModel.fromJson(e)).toList();
+       if (_files.length > 0)
+         setState(() {
+           _selectedModel = _files[0];
+         });
+     } else {
+      debugPrint("Permission Granted False");
+    }
+
   }
 
   Future<String> getVideoPath() async {
